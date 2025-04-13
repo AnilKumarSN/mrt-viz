@@ -1,0 +1,45 @@
+name: Build and Deploy to Netlify
+
+on:
+  push:
+    branches:
+      - main # Trigger deployment only on pushes to the main branch
+  workflow_dispatch: # Allow manual trigger from GitHub Actions UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Use latest checkout action
+
+      - name: Set up Python
+        uses: actions/setup-python@v5 # Use latest setup-python action
+        with:
+          python-version: '3.10' # Specify Python version
+          cache: 'pip' # Cache pip dependencies
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run data pipeline
+        run: python pipeline.py # This generates site/data/as_graph.json
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0 # Use latest netlify action
+        with:
+          publish-dir: './site' # Directory containing index.html and generated data
+          production-branch: main # Deploy this branch to production URL
+          # Specify production-deploy explicitly if needed (default is true for production-branch)
+          # production-deploy: true
+          github-token: ${{ secrets.GITHUB_TOKEN }} # Optional: For commit status updates
+          deploy-message: "Deploy from GitHub Actions workflow: ${{ github.sha }}"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 5 # Set a timeout for the deployment step
