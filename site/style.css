@@ -1,0 +1,56 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+}
+
+h1, p {
+    text-align: center;
+}
+
+#visualization {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Needed for absolute positioning of loading */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    min-height: 700px; /* Ensure container has height */
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+#loading {
+    position: absolute;
+    font-size: 1.2em;
+    color: #555;
+}
+
+svg {
+    display: block; /* Remove extra space below SVG */
+}
+
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+    stroke-width: 1px; /* Keep links thin */
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 1px;
+    fill: steelblue;
+    cursor: pointer; /* Indicate interactivity */
+}
+
+.nodes text {
+    font-size: 10px;
+    fill: #333;
+    pointer-events: none; /* Prevent text from blocking node interaction */
+    text-anchor: middle;
+    dy: 3; /* Adjust vertical position */
+}
+
+/* Optional: Hover effect */
+.nodes circle:hover {
+    fill: orange;
+}

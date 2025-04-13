@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet AS Topology Visualization</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Internet AS Topology (from RRC00 Snapshot)</h1>
+    <p>Visualizing AS relationships inferred from a single BGP routing table dump.</p>
+    <div id="visualization">
+        <div id="loading">Loading graph data...</div>
+        <svg width="960" height="700"></svg>
+    </div>
+    <p>Data source: RIPE NCC RIS (rrc00). This is a simplified view and not the entire live internet.</p>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

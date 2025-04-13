@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*build*/
+*dist*/
+*.egg-info/
+venv/
+env/
+.env
+
+# Downloaded Data (optional, prevents committing large files)
+*.gz
+*.mrt
+
+# OS specific
+.DS_Store
+Thumbs.db
